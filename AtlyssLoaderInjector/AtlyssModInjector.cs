@@ -20,7 +20,7 @@ namespace AtlyssLoaderInjector
 
         private static int Main(string[] args)
         {
-            Console.WriteLine("Press any key to being the Atlyys Mod Injector");
+            Console.WriteLine("Press any key to begin the Atlyys Mod Injector");
             Console.ReadKey();
             Console.WriteLine("Started injector main");
             var directory = Directory.GetCurrentDirectory();
@@ -111,7 +111,6 @@ namespace AtlyssLoaderInjector
                 if (instruction.OpCode.Code.Equals(Code.Call) && instruction.OpCode.OperandType.Equals(OperandType.InlineMethod))
                 {
                     MethodReference methodReference = (MethodReference)instruction.Operand;
-                    Console.WriteLine(methodReference.Name);
                     if (methodReference.Name.Contains("DontDestroyOnLoad"))
                     {
                         targetInstruction = i;
