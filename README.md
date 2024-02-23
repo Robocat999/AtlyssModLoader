@@ -1,5 +1,5 @@
 # AtlyssModLoader
-The AtlyssModLoader is a project encompassing both a code injector and a mod loader for the game ATLYSS by Kiseff. Wishlist [ATLYSS on Steam]([url](https://store.steampowered.com/app/2768430/ATLYSS/))!
+The AtlyssModLoader is a project encompassing both a code injector and a mod loader for the game ATLYSS by Kiseff. Wishlist [ATLYSS on Steam](https://store.steampowered.com/app/2768430/ATLYSS/)!
 
 The AtlyssLoaderInjector is used to splice in the startup code for the AtlyssModLoader in to ATLYSS at runtime. This is neccsary for the AtlyssModLoader to function.
 
@@ -31,11 +31,11 @@ The AtlyssModLoader is at present very bare bones. It does the minimum required 
 Please recognize that this project is done in unpaid freetime as pleased. No feature is a guarantee.
 
 ## Community
-Join us on [Discord]([url](https://discord.gg/2wEsR8M9Nn))!
+Join us on [Discord](https://discord.gg/2wEsR8M9Nn)!
   
-Try out ATLYSS on [itch.io]([url](https://kiseff.itch.io/atlyss)) or [Steam]([url](https://store.steampowered.com/app/2768430/ATLYSS/))!
+Try out ATLYSS on [itch.io](https://kiseff.itch.io/atlyss) or [Steam](https://store.steampowered.com/app/2768430/ATLYSS/)! 
   Please wishlist on Steam, it's a great help!
   
-Want to see more? Get in on early testing by subscribing to Kissef on [Patreon]([url](https://www.patreon.com/Kiseff))! Patreon builds are a load of fun and see frequent updates! Plus, subscribers get access to exclusive discord channels!
+Want to see more? Get in on early testing by subscribing to Kissef on [Patreon](https://www.patreon.com/Kiseff)! Patreon builds are a load of fun and see frequent updates! Plus, subscribers get access to exclusive discord channels!
 
 This project is *unofficial*, please do not bother the developer about this project. 
