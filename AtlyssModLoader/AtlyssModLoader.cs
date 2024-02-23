@@ -94,7 +94,7 @@ namespace AtlyssModLoader
 
         public static void Init()
         {
-            Harmony.DEBUG = true;
+            Harmony.DEBUG = false;
             FileLog.Log("AtlyssModLoader Init has begun");
             var loaderDirectory = Directory.GetCurrentDirectory();
             var modDirectory = Path.GetFullPath(Path.Combine(loaderDirectory, "Mods"));
