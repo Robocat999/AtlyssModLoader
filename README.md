@@ -10,7 +10,7 @@ Note that the AtlyssModLoader is designed with the Patreon builds in mind. While
 ## Intial Setup
 1. Download the latest AtlyssModdingPackage from the releases tab.
 2. Unzip the file in to your ATLYSS folder. It is often found in a directory such as "C:\SteamLibrary\steamapps\common\ATLYSS".
-3. Ensure the AtlyssLoaderInjector is placed *directly* in the ATLYSS folder. It should appear on the same level as "ATLYSS.exe".
+3. Ensure the AtlyssLoaderInjector *folder* is placed *directly* in the ATLYSS folder. It should appear on the same level as "ATLYSS.exe". The folder should contain 5 files: 3 .dll files, 1 .exe, and 1 .json.
 4. Ensure the 0Harmony.dll and AtlyssModLoader.dll files were placed in "ATLYSS/ATLYSS_Data/Managed" directory.
 5. Open the AtlyssLoaderInjector folder, and launch "AtlyssLoaderInjector.exe". Follow its instructions.
 6. Open ATLYSS to generate the Mods folder. Alternativly, create the folder yourself *directly* in the ATLYSS folder.
