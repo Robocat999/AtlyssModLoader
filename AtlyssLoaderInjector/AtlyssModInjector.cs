@@ -24,11 +24,11 @@ namespace AtlyssLoaderInjector
             Console.ReadKey();
             Console.WriteLine("Started injector main");
             var directory = Directory.GetCurrentDirectory();
-            var gameDllPath = Path.Combine(directory, "..", "ATLYSS_Data", "Managed", GameDllFileName);
+            var gameDllPath = Path.Combine(directory, "ATLYSS_Data", "Managed", GameDllFileName);
             gameDllPath = Path.GetFullPath(gameDllPath);
-            var gameDllBackupPath = Path.Combine(directory, "..", "ATLYSS_Data", "Managed", GameDllFileName + BackupFileExt);
+            var gameDllBackupPath = Path.Combine(directory, "ATLYSS_Data", "Managed", GameDllFileName + BackupFileExt);
             gameDllBackupPath = Path.GetFullPath(gameDllBackupPath);
-            var modLoaderDllPath = Path.Combine(directory, "..", "ATLYSS_Data", "Managed", ModLoaderDllFileName);
+            var modLoaderDllPath = Path.Combine(directory, "ATLYSS_Data", "Managed", ModLoaderDllFileName);
             modLoaderDllPath = Path.GetFullPath(modLoaderDllPath);
 
             var injected = IsInjected(gameDllPath);
