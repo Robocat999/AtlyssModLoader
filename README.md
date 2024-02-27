@@ -19,6 +19,9 @@ Once the intial setup is complete, the mod loader will load any .dll files in th
 
 Note that any updates to ATLYSS will require a rerun of injector. Just repeat step 5. Don't worry about accidently injecting too many times, as the injector does a check to prevent that.
 
+## Creating Mods
+Please see the [Wiki](https://github.com/Robocat999/AtlyssModLoader/wiki) for information on creating mods.
+
 ## Current State of AtlyssModLoader
 The AtlyssModLoader can do the following:
 - Load .dll files (mods) in to the game at startup.
