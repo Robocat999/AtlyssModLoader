@@ -34,7 +34,7 @@ The AtlyssModLoader is at present very bare bones. It does the minimum required 
 Please recognize that this project is done in unpaid freetime as pleased. No feature is a guarantee.
 
 ## Community
-Join us on [Discord](https://discord.gg/2wEsR8M9Nn)!
+Join us on [Discord](https://discord.com/invite/vScP5yUbtk)!
   
 Try out ATLYSS on [itch.io](https://kiseff.itch.io/atlyss) or [Steam](https://store.steampowered.com/app/2768430/ATLYSS/)! 
   Please wishlist on Steam, it's a great help!
