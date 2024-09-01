@@ -8,7 +8,7 @@ The AtlyssModLoader uses the Harmony library to patch in .dll files located in a
 Note that the AtlyssModLoader is designed with the Patreon builds in mind. While it should work with the demo, be aware that suppourt is not targeted at that version of the game.
 
 ## Intial Setup
-1. Download the latest AtlyssModdingPackage from the releases tab.
+1. Download the latest AtlyssModdingPackage from the __releases tab__.
 2. Unzip the file in to your ATLYSS folder. It is often found in a directory such as "C:\SteamLibrary\steamapps\common\ATLYSS".
 3. Ensure the AtlyssLoaderInjector executable is *directly* in the ATLYSS folder. It should be in the same folder as "ATLYSS.exe". 
 4. Ensure the 0Harmony.dll and AtlyssModLoader.dll files were placed in "ATLYSS/ATLYSS_Data/Managed" directory.
