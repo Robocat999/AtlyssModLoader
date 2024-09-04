@@ -35,6 +35,7 @@ Please recognize that this project is done in unpaid freetime as pleased. No fea
 
 ## Community
 Get offical updates on Atlyss in the [Offical KisSoft Discord](https://discord.com/invite/vScP5yUbtk)!
+
 Intested in modding? Join us in the [Unoffical Community Discord Server](https://discord.gg/NWCqdufJ3X)!
   
 Try out ATLYSS on [itch.io](https://kiseff.itch.io/atlyss) or [Steam](https://store.steampowered.com/app/2768430/ATLYSS/)! 
