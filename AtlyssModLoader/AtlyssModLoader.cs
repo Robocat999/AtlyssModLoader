@@ -13,6 +13,7 @@ namespace AtlyssModLoader
     public static class AtlyssModLoader
     {
         private const BindingFlags PUBLIC_STATIC_BINDING_FLAGS = BindingFlags.Public | BindingFlags.Static;
+        private const string LOAD_CONFIG_FILE_NAME = "AtlyssModLoader_Load_Order_Config.Json";
         private static readonly List<string> IGNORE_FILE_NAMES = new List<string>()
         {
             "0Harmony.dll",
@@ -92,21 +93,79 @@ namespace AtlyssModLoader
             }
         }
 
+        /// <summary>
+        /// Mass-load newly added mods to the load order config.
+        /// New mods will always come after already present entries.
+        /// Order amongst the new mods is not controlled.
+        /// </summary>
+        /// <param name="modsToAdd"></param>
+        private static void UpdateLoadOrder(string loadConfigDirectory, string[] modsToAdd)
+        {
+
+        }
+
+        /// <summary>
+        /// Checks if there is a load order entry for a dll (mod).
+        /// If there is not one, prep it to be added to the config.
+        /// </summary>
+        /// <param name="dllPath"></param>
+        /// <returns></returns>
+        private static void EnsureLoadOrder(string dllPath, string[] currentMods, ref string[] modsToAdd)
+        {
+
+        }
+
+        /// <summary>
+        /// Gets the current load order of mods
+        /// </summary>
+        /// <param name="loadConfigDirectory"></param>
+        /// <returns></returns>
+        private static string[] GetLoadOrder(string loadConfigDirectory)
+        {
+            string[] currentMods = { };
+            return currentMods;
+        }
+
+        /// <summary>
+        ///  Gets the path to the load order config.
+        ///  Will create the file if it does not exist.
+        /// </summary>
+        /// <returns></returns>
+        private static string GetLoadConfigFile(string modDirectoy)
+        {
+            string configFilePath = Path.Combine(modDirectoy, LOAD_CONFIG_FILE_NAME);
+            if (!File.Exists(configFilePath))
+            {
+                File.Create(configFilePath);
+            }
+            return configFilePath;
+        }
+
+        /// <summary>
+        ///  Gets the path to the mod folder
+        ///  Will create the folder if it does not exist
+        /// </summary>
+        /// <returns></returns>
+        private static string GetModDirectory(string loaderDirectory)
+        {
+            string modDirectoryPath = Path.GetFullPath(Path.Combine(loaderDirectory, "Mods"));
+            if (!Directory.Exists(modDirectoryPath))
+            {
+                Directory.CreateDirectory(modDirectoryPath);
+            }
+            return modDirectoryPath;
+        }
+
         public static void Init()
         {
             Harmony.DEBUG = false;
             FileLog.Log("AtlyssModLoader Init has begun");
-            var loaderDirectory = Directory.GetCurrentDirectory();
-            var modDirectory = Path.GetFullPath(Path.Combine(loaderDirectory, "Mods"));
-            modDirectory = Path.GetFullPath(modDirectory);
+            string loaderDirectory = Directory.GetCurrentDirectory();
+            string modDirectory = GetModDirectory(loaderDirectory);
+            string loadConfigDirectory = GetLoadConfigFile(modDirectory);
 
-            if (!Directory.Exists(modDirectory))
-                Directory.CreateDirectory(modDirectory);
-
-            var harmony = new Harmony("io.github.robocat999.AtlyssModLoader");
-
-            FileLog.Log(modDirectory);
-            var dllPaths = Directory.GetFiles(modDirectory).Where(x => Path.GetExtension(x).ToLower() == ".dll").ToArray();
+            Harmony harmony = new Harmony("io.github.robocat999.AtlyssModLoader");
+            string[] dllPaths = Directory.GetFiles(modDirectory).Where(x => Path.GetExtension(x).ToLower() == ".dll").ToArray();
 
             // Catch no mods loaded
             if (dllPaths.Length == 0)
@@ -117,8 +176,8 @@ namespace AtlyssModLoader
 
             foreach ( var dllPath in dllPaths)
             {
-                if (!IGNORE_FILE_NAMES.Contains(Path.GetFileName(dllPath)))
-                    LoadDLL(dllPath);
+                if (IGNORE_FILE_NAMES.Contains(Path.GetFileName(dllPath)))
+                    continue;
             }
             FileLog.Log("AtlyssModLoader Init has completed normally");
         }
