@@ -101,7 +101,10 @@ namespace AtlyssModLoader
         /// <param name="modsToAdd"></param>
         private static void UpdateLoadOrder(string loadConfigDirectory, string[] modsToAdd)
         {
-
+            for (int i = 0; i < modsToAdd.Length; i++)
+            {
+                // TODO: Convert modsToAdd to json form
+            }
         }
 
         /// <summary>
@@ -112,7 +115,15 @@ namespace AtlyssModLoader
         /// <returns></returns>
         private static void EnsureLoadOrder(string dllPath, string[] currentMods, ref string[] modsToAdd)
         {
-
+            string modName = dllPath; // TODO: Figure out the proper name scheme 
+            for (int i = 0; i < currentMods.Length; i++)
+            {
+                if (currentMods[i] == modName)
+                {
+                    return;
+                }
+            }
+            modsToAdd.AddItem(dllPath);
         }
 
         /// <summary>
