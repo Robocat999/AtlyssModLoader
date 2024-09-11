@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using System.IO;
+using System.Text.Json;
 
 
 // This script uses / adapts the BTMLModLoader (Public Domain)
@@ -118,11 +119,15 @@ namespace AtlyssModLoader
         /// <summary>
         /// Gets the current load order of mods
         /// </summary>
-        /// <param name="loadConfigDirectory"></param>
+        /// <param name="loadConfigFilePath"></param>
         /// <returns></returns>
-        private static string[] GetLoadOrder(string loadConfigDirectory)
+        private static string[] GetLoadOrder(string loadConfigFilePath)
         {
             string[] currentMods = { };
+
+            FileStream stream = File.OpenRead(loadConfigFilePath);
+            JsonSerializer.DeserializeAsync<T>(stream);
+
             return currentMods;
         }
 
@@ -162,7 +167,7 @@ namespace AtlyssModLoader
             FileLog.Log("AtlyssModLoader Init has begun");
             string loaderDirectory = Directory.GetCurrentDirectory();
             string modDirectory = GetModDirectory(loaderDirectory);
-            string loadConfigDirectory = GetLoadConfigFile(modDirectory);
+            string loadConfigFilePath = GetLoadConfigFile(modDirectory);
 
             Harmony harmony = new Harmony("io.github.robocat999.AtlyssModLoader");
             string[] dllPaths = Directory.GetFiles(modDirectory).Where(x => Path.GetExtension(x).ToLower() == ".dll").ToArray();
@@ -174,10 +179,14 @@ namespace AtlyssModLoader
                 return;
             }
 
+            string[] loadOrder = GetLoadOrder(loadConfigFilePath);
+
             foreach ( var dllPath in dllPaths)
             {
                 if (IGNORE_FILE_NAMES.Contains(Path.GetFileName(dllPath)))
                     continue;
+
+
             }
             FileLog.Log("AtlyssModLoader Init has completed normally");
         }
