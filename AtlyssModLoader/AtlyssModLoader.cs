@@ -146,12 +146,12 @@ namespace AtlyssModLoader
         /// </summary>
         /// <param name="loadConfigFilePath"></param>
         /// <returns></returns>
-        private static string[] GetLoadOrder(string loadConfigFilePath)
+        private static LoadOrderEntry[] GetLoadOrder(string loadConfigFilePath)
         {
-            string[] currentMods = { };
+            LoadOrderEntry[] modEntires = { };
 
 
-            return currentMods;
+            return modEntires;
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace AtlyssModLoader
                 return;
             }
 
-            string[] loadOrder = GetLoadOrder(loadConfigFilePath);
+            LoadOrderEntry[] loadOrder = GetLoadOrder(loadConfigFilePath);
 
             foreach ( var dllPath in dllPaths)
             {
