@@ -197,8 +197,14 @@ namespace AtlyssModLoader
                 if (IGNORE_FILE_NAMES.Contains(Path.GetFileName(dllPath)))
                     continue;
 
-
+                // Verify each path is in the load order
+                  // Need to devise a method to auto remove missing 
             }
+
+            // Update load order json
+            // Get full load order 
+            // Loop through 
+
             FileLog.Log("AtlyssModLoader Init has completed normally");
         }
 
