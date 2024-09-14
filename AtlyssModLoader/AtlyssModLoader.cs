@@ -5,6 +5,7 @@ using System.Reflection;
 using HarmonyLib;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 
 // This script uses / adapts the BTMLModLoader (Public Domain)
@@ -95,6 +96,19 @@ namespace AtlyssModLoader
         }
 
         /// <summary>
+        /// 
+        /// Credit: https://stackoverflow.com/questions/13297563/read-and-parse-a-json-file-in-c-sharp
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private static async Task<T> ReadJsonAsync<T>(string filePath)
+        {
+            using FileStream stream = File.OpenRead(filePath);
+            return await JsonSerializer.DeserializeAsync<T>(stream);
+        }
+
+        /// <summary>
         /// Mass-load newly added mods to the load order config.
         /// New mods will always come after already present entries.
         /// Order amongst the new mods is not controlled.
@@ -136,8 +150,6 @@ namespace AtlyssModLoader
         {
             string[] currentMods = { };
 
-            FileStream stream = File.OpenRead(loadConfigFilePath);
-            JsonSerializer.DeserializeAsync<T>(stream);
 
             return currentMods;
         }
