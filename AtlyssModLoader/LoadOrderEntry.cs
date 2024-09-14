@@ -9,7 +9,6 @@ namespace AtlyssModLoader
     internal class LoadOrderEntry
     {
         public string ModName { get; set; }
-        public int LoadOrder {  get; set; }
         public int InternalVersion { get; set; }
         public string ExternalVersion { get; set; }
     }
