@@ -108,6 +108,12 @@ namespace AtlyssModLoader
             return await JsonSerializer.DeserializeAsync<T>(stream);
         }
 
+        private static async void WriteJsonAsync(string filePath, <T> objectToSerialize)
+        {
+            string jsonString = JsonSerializer.Serialize(weatherForecast);
+            // TODO: Write to the file
+        }
+
         /// <summary>
         /// Mass-load newly added mods to the load order config.
         /// New mods will always come after already present entries.
