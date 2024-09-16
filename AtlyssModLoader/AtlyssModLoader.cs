@@ -152,12 +152,11 @@ namespace AtlyssModLoader
         /// </summary>
         /// <param name="loadConfigFilePath"></param>
         /// <returns></returns>
-        private static string[] GetLoadOrder(string loadConfigFilePath)
+        private static async Task<LoadOrderEntry[]> GetLoadOrder(string loadConfigFilePath)
         {
-            string[] currentMods = { };
-
-
-            return currentMods;
+            LoadOrderEntry[] modEntires = { };
+            LoadOrderJsonData jsonLoad = await ReadJsonAsync<LoadOrderJsonData>(loadConfigFilePath);
+            return modEntires;
         }
 
         /// <summary>
@@ -190,7 +189,7 @@ namespace AtlyssModLoader
             return modDirectoryPath;
         }
 
-        public static void Init()
+        private static async Task InitAsync()
         {
             Harmony.DEBUG = false;
             FileLog.Log("AtlyssModLoader Init has begun");
@@ -208,18 +207,28 @@ namespace AtlyssModLoader
                 return;
             }
 
-            string[] loadOrder = GetLoadOrder(loadConfigFilePath);
+            LoadOrderEntry[] loadOrder = await GetLoadOrder(loadConfigFilePath);
 
-            foreach ( var dllPath in dllPaths)
+            foreach (var dllPath in dllPaths)
             {
                 if (IGNORE_FILE_NAMES.Contains(Path.GetFileName(dllPath)))
                     continue;
 
-
+                // Verify each path is in the load order
+                // Need to devise a method to auto remove missing 
             }
+
+            // Update load order json
+            // Get full load order 
+            // Loop through 
+
             FileLog.Log("AtlyssModLoader Init has completed normally");
         }
 
-
+        // Entry Point
+        public static void Init()
+        {
+            InitAsync().Wait();
+        }
     }
 }
