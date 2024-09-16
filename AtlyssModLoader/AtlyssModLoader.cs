@@ -108,10 +108,10 @@ namespace AtlyssModLoader
             return await JsonSerializer.DeserializeAsync<T>(stream);
         }
 
-        private static async void WriteJsonAsync(string filePath, <T> objectToSerialize)
+        private static async void WriteJsonAsync<T>(string filePath, T objectToSerialize)
         {
-            string jsonString = JsonSerializer.Serialize(weatherForecast);
-            // TODO: Write to the file
+            string jsonString = JsonSerializer.Serialize(objectToSerialize);
+            File.WriteAllText(filePath, jsonString);
         }
 
         /// <summary>
@@ -120,11 +120,29 @@ namespace AtlyssModLoader
         /// Order amongst the new mods is not controlled.
         /// </summary>
         /// <param name="modsToAdd"></param>
-        private static void UpdateLoadOrder(string loadConfigDirectory, string[] modsToAdd)
+        private static void UpdateLoadOrder(string modDirectory, string[] modsToAdd, LoadOrderJsonData loadData)
         {
-            for (int i = 0; i < modsToAdd.Length; i++)
+            // Clear out bad existing entries
+            LoadOrderEntry[] loadOrderEntries = loadData.LoadOrderEntries;
+            for (int i = 0; i < loadData.LoadOrderEntries.Length; i++)
             {
-                // TODO: Convert modsToAdd to json form
+                string dllPath = Path.Combine(modDirectory, loadOrderEntries[i].ModName);
+                if (!File.Exists(dllPath)) 
+                {
+                    List<LoadOrderEntry> loadEntries = new List<LoadOrderEntry>();
+                    loadEntries.RemoveAt(i);
+                    loadOrderEntries = loadEntries.ToArray();
+                }
+            }
+
+            // Load in new entries
+            foreach (string modName in modsToAdd)
+            {
+                LoadOrderEntry newEntry = new LoadOrderEntry();
+                newEntry.ModName = modName;
+                newEntry.InternalVersion = 0;
+                newEntry.ExternalVersion = "NOT IN USE";
+                loadData.LoadOrderEntries.AddItem(newEntry);
             }
         }
 
@@ -134,29 +152,17 @@ namespace AtlyssModLoader
         /// </summary>
         /// <param name="dllPath"></param>
         /// <returns></returns>
-        private static void EnsureLoadOrder(string dllPath, string[] currentMods, ref string[] modsToAdd)
+        private static void EnsureLoadOrder(string dllPath, LoadOrderJsonData loadOrder, ref string[] modsToAdd)
         {
-            string modName = dllPath; // TODO: Figure out the proper name scheme 
-            for (int i = 0; i < currentMods.Length; i++)
+            string modName = Path.GetFileName(dllPath); // TODO: Figure out the proper name scheme 
+            foreach(LoadOrderEntry loadEntry in loadOrder.LoadOrderEntries)
             {
-                if (currentMods[i] == modName)
+                if (loadEntry.ModName == modName)
                 {
                     return;
                 }
             }
-            modsToAdd.AddItem(dllPath);
-        }
-
-        /// <summary>
-        /// Gets the current load order of mods
-        /// </summary>
-        /// <param name="loadConfigFilePath"></param>
-        /// <returns></returns>
-        private static async Task<LoadOrderEntry[]> GetLoadOrder(string loadConfigFilePath)
-        {
-            LoadOrderEntry[] modEntires = { };
-            LoadOrderJsonData jsonLoad = await ReadJsonAsync<LoadOrderJsonData>(loadConfigFilePath);
-            return modEntires;
+            modsToAdd.AddItem(modName);
         }
 
         /// <summary>
@@ -207,20 +213,24 @@ namespace AtlyssModLoader
                 return;
             }
 
-            LoadOrderEntry[] loadOrder = await GetLoadOrder(loadConfigFilePath);
+            LoadOrderJsonData loadOrder = await ReadJsonAsync<LoadOrderJsonData>(loadConfigFilePath);
+            string[] modsToAdd = { };
 
             foreach (var dllPath in dllPaths)
             {
                 if (IGNORE_FILE_NAMES.Contains(Path.GetFileName(dllPath)))
                     continue;
 
-                // Verify each path is in the load order
-                // Need to devise a method to auto remove missing 
+                EnsureLoadOrder(dllPath, loadOrder, ref modsToAdd); 
             }
 
-            // Update load order json
-            // Get full load order 
-            // Loop through 
+            UpdateLoadOrder(modDirectory, modsToAdd, loadOrder);
+            
+            foreach (LoadOrderEntry modEntry in loadOrder.LoadOrderEntries)
+            {
+                string dllPath = Path.Combine(modDirectory, modEntry.ModName);
+                LoadDLL(dllPath);
+            }
 
             FileLog.Log("AtlyssModLoader Init has completed normally");
         }
