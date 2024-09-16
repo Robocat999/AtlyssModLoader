@@ -108,7 +108,7 @@ namespace AtlyssModLoader
             return await JsonSerializer.DeserializeAsync<T>(stream);
         }
 
-        private static async void WriteJsonAsync<T>(string filePath, T objectToSerialize)
+        private static void WriteJson<T>(string filePath, T objectToSerialize)
         {
             string jsonString = JsonSerializer.Serialize(objectToSerialize);
             File.WriteAllText(filePath, jsonString);
@@ -120,7 +120,7 @@ namespace AtlyssModLoader
         /// Order amongst the new mods is not controlled.
         /// </summary>
         /// <param name="modsToAdd"></param>
-        private static void UpdateLoadOrder(string modDirectory, string[] modsToAdd, LoadOrderJsonData loadData)
+        private static void UpdateLoadOrder(string jsonDirectory, string modDirectory, string[] modsToAdd, LoadOrderJsonData loadData)
         {
             // Clear out bad existing entries
             LoadOrderEntry[] loadOrderEntries = loadData.LoadOrderEntries;
@@ -144,6 +144,8 @@ namespace AtlyssModLoader
                 newEntry.ExternalVersion = "NOT IN USE";
                 loadData.LoadOrderEntries.AddItem(newEntry);
             }
+
+            WriteJson(jsonDirectory, loadData);
         }
 
         /// <summary>
@@ -224,7 +226,7 @@ namespace AtlyssModLoader
                 EnsureLoadOrder(dllPath, loadOrder, ref modsToAdd); 
             }
 
-            UpdateLoadOrder(modDirectory, modsToAdd, loadOrder);
+            UpdateLoadOrder(loadConfigFilePath, modDirectory, modsToAdd, loadOrder);
             
             foreach (LoadOrderEntry modEntry in loadOrder.LoadOrderEntries)
             {
