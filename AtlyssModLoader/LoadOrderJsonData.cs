@@ -8,6 +8,6 @@ namespace AtlyssModLoader
 {
     internal class LoadOrderJsonData
     {
-        LoadOrderEntry[] LoadOrderEntries;
+        public LoadOrderEntry[] LoadOrderEntries { get; set; }
     }
 }
