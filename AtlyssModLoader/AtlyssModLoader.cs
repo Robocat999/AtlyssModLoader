@@ -108,9 +108,10 @@ namespace AtlyssModLoader
             return await JsonSerializer.DeserializeAsync<T>(stream);
         }
 
-        private static async void WriteJsonAsync(string filePath, <T> objectToSerialize)
+        private static async Task WriteJsonAsync<T>(string filePath, T objectToSerialize)
         {
             string jsonString = JsonSerializer.Serialize(weatherForecast);
+            using FileStream stream = File.OpenWrite(filePath);
             // TODO: Write to the file
         }
 

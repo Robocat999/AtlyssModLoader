@@ -18,8 +18,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -40,7 +44,7 @@
               "RelativeDocumentMoniker": "AtlyssModLoader\\AtlyssModLoader.cs",
               "ToolTip": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.cs",
               "RelativeToolTip": "AtlyssModLoader\\AtlyssModLoader.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAmwHYAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAmwHEAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-07T22:31:52.507Z",
               "EditorCaption": ""
