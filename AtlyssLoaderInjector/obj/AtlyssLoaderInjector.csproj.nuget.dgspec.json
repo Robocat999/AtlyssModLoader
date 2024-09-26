@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj": {}
+    "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj": {}
   },
   "projects": {
-    "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj": {
+    "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
+        "projectUniqueName": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
         "projectName": "AtlyssLoaderInjector",
-        "projectPath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
+        "projectPath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
         "packagesPath": "C:\\Users\\blued\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\obj\\",
+        "outputPath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\blued\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -43,6 +48,10 @@
             "Lib.Harmony": {
               "target": "Package",
               "version": "[2.3.3, )"
+            },
+            "Mono.Cecil": {
+              "target": "Package",
+              "version": "[0.11.5, )"
             }
           },
           "imports": [
@@ -61,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

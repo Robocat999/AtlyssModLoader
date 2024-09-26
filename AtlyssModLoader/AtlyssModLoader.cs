@@ -178,6 +178,8 @@ namespace AtlyssModLoader
             if (!File.Exists(configFilePath))
             {
                 File.Create(configFilePath);
+                LoadOrderJsonData defaultData = new LoadOrderJsonData();
+                WriteJson(configFilePath, defaultData);
             }
             return configFilePath;
         }

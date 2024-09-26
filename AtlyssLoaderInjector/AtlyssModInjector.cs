@@ -1,5 +1,8 @@
 ﻿using Mono.Cecil;
 using Mono.Cecil.Cil;
+using MethodDefinition = Mono.Cecil.MethodDefinition;
+using ModuleDefinition = Mono.Cecil.ModuleDefinition;
+using TypeDefinition = Mono.Cecil.TypeDefinition;
 
 // This script uses / adapts the BTMLInjector (Public Domain)
 // https://github.com/BattletechModders/BattleTechModLoader/releases
