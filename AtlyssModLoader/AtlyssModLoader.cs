@@ -6,6 +6,7 @@ using HarmonyLib;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Runtime.Remoting.Messaging;
 
 
 // This script uses / adapts the BTMLModLoader (Public Domain)
@@ -14,6 +15,7 @@ namespace AtlyssModLoader
 {
     public static class AtlyssModLoader
     {
+        private const int JSON_VERSION = 1;
         private const BindingFlags PUBLIC_STATIC_BINDING_FLAGS = BindingFlags.Public | BindingFlags.Static;
         private const string LOAD_CONFIG_FILE_NAME = "AtlyssModLoader_Load_Order_Config.Json";
         private static readonly List<string> IGNORE_FILE_NAMES = new List<string>()
@@ -104,12 +106,20 @@ namespace AtlyssModLoader
         /// <returns></returns>
         private static async Task<T> ReadJsonAsync<T>(string filePath)
         {
+            FileLog.Log("Reading Json...");
+            if (!File.Exists(filePath))
+            {
+                FileLog.Log("  Could not find file");
+                return await default(Task<T>).ConfigureAwait(false);
+            }
+
             using FileStream stream = File.OpenRead(filePath);
-            return await JsonSerializer.DeserializeAsync<T>(stream);
+            return await JsonSerializer.DeserializeAsync<T>(stream).ConfigureAwait(false);
         }
 
         private static void WriteJson<T>(string filePath, T objectToSerialize)
         {
+            FileLog.Log("Writing Json...");
             string jsonString = JsonSerializer.Serialize(objectToSerialize);
             File.WriteAllText(filePath, jsonString);
         }
@@ -120,29 +130,31 @@ namespace AtlyssModLoader
         /// Order amongst the new mods is not controlled.
         /// </summary>
         /// <param name="modsToAdd"></param>
-        private static void UpdateLoadOrder(string jsonDirectory, string modDirectory, string[] modsToAdd, LoadOrderJsonData loadData)
+        private static void UpdateLoadOrder(string jsonDirectory, string modDirectory, List<string> modsToAdd, LoadOrderJsonData loadData)
         {
+            FileLog.Log("UpdateLoadOrder Activated");
             // Clear out bad existing entries
-            LoadOrderEntry[] loadOrderEntries = loadData.LoadOrderEntries;
-            for (int i = 0; i < loadData.LoadOrderEntries.Length; i++)
+            List<LoadOrderEntry> loadOrderEntries = loadData.LoadOrderEntries;
+            for (int i = 0; i < loadData.LoadOrderEntries.Count; i++)
             {
                 string dllPath = Path.Combine(modDirectory, loadOrderEntries[i].ModName);
                 if (!File.Exists(dllPath)) 
                 {
-                    List<LoadOrderEntry> loadEntries = new List<LoadOrderEntry>();
+                    List<LoadOrderEntry> loadEntries = loadData.LoadOrderEntries;
                     loadEntries.RemoveAt(i);
-                    loadOrderEntries = loadEntries.ToArray();
+                    loadOrderEntries = loadEntries.ToList();
                 }
             }
 
             // Load in new entries
             foreach (string modName in modsToAdd)
             {
+                FileLog.Log(modName);
                 LoadOrderEntry newEntry = new LoadOrderEntry();
                 newEntry.ModName = modName;
                 newEntry.InternalVersion = 0;
                 newEntry.ExternalVersion = "NOT IN USE";
-                loadData.LoadOrderEntries.AddItem(newEntry);
+                loadData.LoadOrderEntries.Add(newEntry);
             }
 
             WriteJson(jsonDirectory, loadData);
@@ -154,17 +166,21 @@ namespace AtlyssModLoader
         /// </summary>
         /// <param name="dllPath"></param>
         /// <returns></returns>
-        private static void EnsureLoadOrder(string dllPath, LoadOrderJsonData loadOrder, ref string[] modsToAdd)
+        private static void EnsureLoadOrder(string dllPath, LoadOrderJsonData loadOrder, ref List<string> modsToAdd)
         {
+            FileLog.Log("EnsureLoadOrder Activated");
             string modName = Path.GetFileName(dllPath); // TODO: Figure out the proper name scheme 
             foreach(LoadOrderEntry loadEntry in loadOrder.LoadOrderEntries)
             {
                 if (loadEntry.ModName == modName)
                 {
+                    FileLog.Log("  Mod was already tracked");
                     return;
                 }
             }
-            modsToAdd.AddItem(modName);
+            FileLog.Log($"  Adding new mod with name {modName} to modsToAdd");
+            modsToAdd.Add(modName);
+            FileLog.Log($"  Oh oh, lookie here {modsToAdd.Count}");
         }
 
         /// <summary>
@@ -179,6 +195,8 @@ namespace AtlyssModLoader
             {
                 File.Create(configFilePath);
                 LoadOrderJsonData defaultData = new LoadOrderJsonData();
+                defaultData.JsonVersion = JSON_VERSION;
+                defaultData.LoadOrderEntries = new List<LoadOrderEntry>();
                 WriteJson(configFilePath, defaultData);
             }
             return configFilePath;
@@ -208,17 +226,18 @@ namespace AtlyssModLoader
             string loadConfigFilePath = GetLoadConfigFile(modDirectory);
 
             Harmony harmony = new Harmony("io.github.robocat999.AtlyssModLoader");
-            string[] dllPaths = Directory.GetFiles(modDirectory).Where(x => Path.GetExtension(x).ToLower() == ".dll").ToArray();
+            List<string> dllPaths = Directory.GetFiles(modDirectory).Where(x => Path.GetExtension(x).ToLower() == ".dll").ToList();
 
             // Catch no mods loaded
-            if (dllPaths.Length == 0)
+            if (dllPaths.Count == 0)
             {
                 FileLog.Log("AtlyssModLoader Init found no mods to load");
                 return;
             }
 
-            LoadOrderJsonData loadOrder = await ReadJsonAsync<LoadOrderJsonData>(loadConfigFilePath);
-            string[] modsToAdd = { };
+            LoadOrderJsonData loadOrder = await ReadJsonAsync<LoadOrderJsonData>(loadConfigFilePath).ConfigureAwait(false);
+            List<string> modsToAdd = new List<string>();
+            FileLog.Log("Beat the Read Async");
 
             foreach (var dllPath in dllPaths)
             {
@@ -227,7 +246,7 @@ namespace AtlyssModLoader
 
                 EnsureLoadOrder(dllPath, loadOrder, ref modsToAdd); 
             }
-
+            FileLog.Log($"  ModsToAdd length: {modsToAdd.Count}");
             UpdateLoadOrder(loadConfigFilePath, modDirectory, modsToAdd, loadOrder);
             
             foreach (LoadOrderEntry modEntry in loadOrder.LoadOrderEntries)

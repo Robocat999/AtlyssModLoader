@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj": {}
+    "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj": {}
   },
   "projects": {
-    "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj": {
+    "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
+        "projectUniqueName": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
         "projectName": "AtlyssModLoader",
-        "projectPath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
+        "projectPath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
         "packagesPath": "C:\\Users\\blued\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssModLoader\\obj\\",
         "projectStyle": "PackageReference",
@@ -18,15 +18,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net461"
+          "net462"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net461": {
-            "targetAlias": "net461",
+          "net462": {
+            "targetAlias": "net462",
             "projectReferences": {}
           }
         },
@@ -42,8 +42,8 @@
         }
       },
       "frameworks": {
-        "net461": {
-          "targetAlias": "net461",
+        "net462": {
+          "targetAlias": "net462",
           "dependencies": {
             "Lib.Harmony": {
               "target": "Package",
@@ -61,7 +61,7 @@
             },
             "System.Text.Json": {
               "target": "Package",
-              "version": "[4.6.0, )"
+              "version": "[8.0.4, )"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401\\RuntimeIdentifierGraph.json"
