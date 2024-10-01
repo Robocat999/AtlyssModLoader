@@ -25,11 +25,12 @@ Please see the [Wiki](https://github.com/Robocat999/AtlyssModLoader/wiki) for in
 ## Current State of AtlyssModLoader
 The AtlyssModLoader can do the following:
 - Load .dll files (mods) in to the game at startup.
+- Load ordering through a JSON file.
 
-The AtlyssModLoader is at present very bare bones. It does the minimum required and nothing more. However, the following are recognized as core features and *may* be added in future updates:
-- Load ordering
-- Mod dependencies
+The AtlyssModLoader is at present fairly bare bones. However, the following are recognized as core features and *may* be added in future updates:
 - In-game mode of managing active mods and their load order.
+- In-game indicator of mods being loaded at game start-up.
+- Convient ways to find and download mods.
 
 Please recognize that this project is done in unpaid freetime as pleased. No feature is a guarantee.
 
