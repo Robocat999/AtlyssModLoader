@@ -1,0 +1,6 @@
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Debug\net8.0\AtlyssLoaderInjector.csproj.AssemblyReference.cache
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Debug\net8.0\AtlyssLoaderInjector.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Debug\net8.0\AtlyssLoaderInjector.AssemblyInfoInputs.cache
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Debug\net8.0\AtlyssLoaderInjector.AssemblyInfo.cs
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Debug\net8.0\AtlyssLoaderInjector.csproj.CoreCompileInputs.cache
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Debug\net8.0\AtlyssLoaderInjector.sourcelink.json

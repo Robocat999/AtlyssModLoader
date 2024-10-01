@@ -1,0 +1,79 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C01CBE66-BBB4-47D6-93BC-A990EB11ADCF}|AtlyssModLoader\\AtlyssModLoader.csproj|c:\\users\\blued\\source\\repos\\atlyssmodloader\\atlyssmodloader\\atlyssmodloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C01CBE66-BBB4-47D6-93BC-A990EB11ADCF}|AtlyssModLoader\\AtlyssModLoader.csproj|solutionrelative:atlyssmodloader\\atlyssmodloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C01CBE66-BBB4-47D6-93BC-A990EB11ADCF}|AtlyssModLoader\\AtlyssModLoader.csproj|c:\\users\\blued\\source\\repos\\atlyssmodloader\\atlyssmodloader\\loadorderjsondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C01CBE66-BBB4-47D6-93BC-A990EB11ADCF}|AtlyssModLoader\\AtlyssModLoader.csproj|solutionrelative:atlyssmodloader\\loadorderjsondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6CB3975-64A0-4ABA-BCB4-342C89295106}|AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj|c:\\users\\blued\\source\\repos\\atlyssmodloader\\atlyssloaderinjector\\atlyssmodinjector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6CB3975-64A0-4ABA-BCB4-342C89295106}|AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj|solutionrelative:atlyssloaderinjector\\atlyssmodinjector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AtlyssModInjector.cs",
+              "DocumentMoniker": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssModInjector.cs",
+              "RelativeDocumentMoniker": "AtlyssLoaderInjector\\AtlyssModInjector.cs",
+              "ToolTip": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssModInjector.cs",
+              "RelativeToolTip": "AtlyssLoaderInjector\\AtlyssModInjector.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAIwGEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T05:44:06.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoadOrderJsonData.cs",
+              "DocumentMoniker": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\LoadOrderJsonData.cs",
+              "RelativeDocumentMoniker": "AtlyssModLoader\\LoadOrderJsonData.cs",
+              "ToolTip": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\LoadOrderJsonData.cs",
+              "RelativeToolTip": "AtlyssModLoader\\LoadOrderJsonData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T04:53:37.977Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AtlyssModLoader.cs",
+              "DocumentMoniker": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.cs",
+              "RelativeDocumentMoniker": "AtlyssModLoader\\AtlyssModLoader.cs",
+              "ToolTip": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.cs",
+              "RelativeToolTip": "AtlyssModLoader\\AtlyssModLoader.cs",
+              "ViewState": "AgIAAIkAAAAAAAAAAAAswJIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-07T22:31:52.507Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
