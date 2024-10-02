@@ -6,7 +6,6 @@ using HarmonyLib;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Runtime.Remoting.Messaging;
 
 
 // This script uses / adapts the BTMLModLoader (Public Domain)
@@ -27,7 +26,8 @@ namespace AtlyssModLoader
         public static void LoadDLL(string path, string methodName = "Init", string typeName = null,
             object[] prms = null, BindingFlags bFlags = PUBLIC_STATIC_BINDING_FLAGS)
         {
-            FileLog.Log("AtlyssModLoader is attempting to laod a DLL");
+            if (Harmony.DEBUG)
+                FileLog.Log("AtlyssModLoader is attempting to laod a DLL");
             var fileName = Path.GetFileName(path);
             
             try
@@ -49,7 +49,8 @@ namespace AtlyssModLoader
 
                 if (types.Count == 0)
                 {
-                    FileLog.Log("  DLL loader type count was 0");
+                    if (Harmony.DEBUG)
+                        FileLog.Log("  DLL loader type count was 0");
                     return;
                 }
 
@@ -63,7 +64,8 @@ namespace AtlyssModLoader
 
                     if (methodParams.Length == 0)
                     {
-                        FileLog.Log(  "AtlyssModLoader inserted a DLL method with no params");
+                        if (Harmony.DEBUG)
+                            FileLog.Log(  "AtlyssModLoader inserted a DLL method with no params");
                         entryMethod.Invoke(null, null);
                         continue;
                     }
@@ -107,10 +109,12 @@ namespace AtlyssModLoader
         /// <returns></returns>
         private static async Task<T> ReadJsonAsync<T>(string filePath)
         {
-            FileLog.Log("Reading Json...");
+            if (Harmony.DEBUG)
+                FileLog.Log("Reading Json...");
             if (!File.Exists(filePath))
             {
-                FileLog.Log("  Could not find file");
+                if (Harmony.DEBUG)
+                    FileLog.Log("  Could not find file");
                 return await default(Task<T>).ConfigureAwait(false);
             }
 
@@ -120,7 +124,8 @@ namespace AtlyssModLoader
 
         private static void WriteJson<T>(string filePath, T objectToSerialize)
         {
-            FileLog.Log("Writing Json...");
+            if (Harmony.DEBUG)
+                FileLog.Log("Writing Json...");
             string jsonString = JsonSerializer.Serialize(objectToSerialize);
             File.WriteAllText(filePath, jsonString);
         }
@@ -133,7 +138,8 @@ namespace AtlyssModLoader
         /// <param name="modsToAdd"></param>
         private static void UpdateLoadOrder(string jsonDirectory, string modDirectory, List<string> modsToAdd, LoadOrderJsonData loadData)
         {
-            FileLog.Log("UpdateLoadOrder Activated");
+            if (Harmony.DEBUG)
+                FileLog.Log("UpdateLoadOrder Activated");
             // Clear out bad existing entries
             List<LoadOrderEntry> loadOrderEntries = loadData.LoadOrderEntries;
             for (int i = 0; i < loadData.LoadOrderEntries.Count; i++)
@@ -169,19 +175,22 @@ namespace AtlyssModLoader
         /// <returns></returns>
         private static void EnsureLoadOrder(string dllPath, LoadOrderJsonData loadOrder, ref List<string> modsToAdd)
         {
-            FileLog.Log("EnsureLoadOrder Activated");
+            if (Harmony.DEBUG)
+                FileLog.Log("EnsureLoadOrder Activated");
             string modName = Path.GetFileName(dllPath); // TODO: Figure out the proper name scheme 
             foreach(LoadOrderEntry loadEntry in loadOrder.LoadOrderEntries)
             {
                 if (loadEntry.ModName == modName)
                 {
-                    FileLog.Log("  Mod was already tracked");
+                    if (Harmony.DEBUG)
+                        FileLog.Log("  Mod was already tracked");
                     return;
                 }
             }
-            FileLog.Log($"  Adding new mod with name {modName} to modsToAdd");
+
+            if (Harmony.DEBUG)
+                FileLog.Log($"  Adding new mod with name {modName} to modsToAdd");
             modsToAdd.Add(modName);
-            FileLog.Log($"  Oh oh, lookie here {modsToAdd.Count}");
         }
 
         /// <summary>
@@ -220,8 +229,8 @@ namespace AtlyssModLoader
 
         private static async Task InitAsync()
         {
-            Harmony.DEBUG = false;
-            FileLog.Log("AtlyssModLoader Init has begun");
+            if (Harmony.DEBUG)
+                FileLog.Log("AtlyssModLoader Init has begun");
             string loaderDirectory = Directory.GetCurrentDirectory();
             string modDirectory = GetModDirectory(loaderDirectory);
             string loadConfigFilePath = GetLoadConfigFile(modDirectory);
@@ -232,13 +241,13 @@ namespace AtlyssModLoader
             // Catch no mods loaded
             if (dllPaths.Count == 0)
             {
-                FileLog.Log("AtlyssModLoader Init found no mods to load");
+                if (Harmony.DEBUG)
+                    FileLog.Log("AtlyssModLoader Init found no mods to load");
                 return;
             }
 
             LoadOrderJsonData loadOrder = await ReadJsonAsync<LoadOrderJsonData>(loadConfigFilePath).ConfigureAwait(false);
             List<string> modsToAdd = new List<string>();
-            FileLog.Log("Beat the Read Async");
 
             foreach (var dllPath in dllPaths)
             {
@@ -247,7 +256,7 @@ namespace AtlyssModLoader
 
                 EnsureLoadOrder(dllPath, loadOrder, ref modsToAdd); 
             }
-            FileLog.Log($"  ModsToAdd length: {modsToAdd.Count}");
+
             UpdateLoadOrder(loadConfigFilePath, modDirectory, modsToAdd, loadOrder);
             
             foreach (LoadOrderEntry modEntry in loadOrder.LoadOrderEntries)
@@ -255,13 +264,15 @@ namespace AtlyssModLoader
                 string dllPath = Path.Combine(modDirectory, modEntry.ModName);
                 LoadDLL(dllPath);
             }
-
-            FileLog.Log("AtlyssModLoader Init has completed normally");
+            
+            if (Harmony.DEBUG)
+                FileLog.Log("AtlyssModLoader Init has completed normally");
         }
 
         // Entry Point
         public static void Init()
         {
+            Harmony.DEBUG = false;
             InitAsync().Wait();
         }
     }
