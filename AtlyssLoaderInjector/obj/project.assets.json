@@ -71,7 +71,7 @@
           }
         }
       },
-      "System.Text.Json/8.0.1": {
+      "System.Text.Json/8.0.4": {
         "type": "package",
         "dependencies": {
           "System.Text.Encodings.Web": "8.0.0"
@@ -200,10 +200,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Text.Json/8.0.1": {
-      "sha512": "7AWk2za1hSEJBppe/Lg+uDcam2TrDqwIKa9XcPssSwyjC2xa39EKEGul3CO5RWNF+hMuZG4zlBDrvhBdDTg4lg==",
+    "System.Text.Json/8.0.4": {
+      "sha512": "bAkhgDJ88XTsqczoxEMliSrpijKZHhbJQldhAmObj/RbrN3sU5dcokuXmWJWsdQAhiMJ9bTayWsL1C9fbbCRhw==",
       "type": "package",
-      "path": "system.text.json/8.0.1",
+      "path": "system.text.json/8.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -268,7 +268,7 @@
         "lib/net8.0/System.Text.Json.xml",
         "lib/netstandard2.0/System.Text.Json.dll",
         "lib/netstandard2.0/System.Text.Json.xml",
-        "system.text.json.8.0.1.nupkg.sha512",
+        "system.text.json.8.0.4.nupkg.sha512",
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -277,7 +277,8 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Lib.Harmony >= 2.3.3",
-      "Mono.Cecil >= 0.11.5"
+      "Mono.Cecil >= 0.11.5",
+      "System.Text.Json >= 8.0.4"
     ]
   },
   "packageFolders": {
@@ -290,7 +291,7 @@
       "projectName": "AtlyssLoaderInjector",
       "projectPath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
       "packagesPath": "C:\\Users\\blued\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\obj\\",
+      "outputPath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\blued\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -331,6 +332,10 @@
           "Mono.Cecil": {
             "target": "Package",
             "version": "[0.11.5, )"
+          },
+          "System.Text.Json": {
+            "target": "Package",
+            "version": "[8.0.4, )"
           }
         },
         "imports": [

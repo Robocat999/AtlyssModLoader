@@ -94,6 +94,7 @@ namespace AtlyssModLoader
             catch (Exception e)
             {
                 FileLog.Log("  DLL hit an unexpected error!");
+                FileLog.Log($"{e}");
             }
         }
 
