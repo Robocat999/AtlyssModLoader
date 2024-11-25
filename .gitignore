@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/AtlyssModLoader/FileContentIndex
+/AtlyssLoaderInjector/obj/Release/net8.0
+/AtlyssLoaderInjector/obj
+/AtlyssModLoader/obj/Release/net46
+/AtlyssModLoader/obj
+/.gitignore
