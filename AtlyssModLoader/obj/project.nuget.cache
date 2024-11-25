@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ohjtQS01lAA=",
+  "dgSpecHash": "YiDaK437Axo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
+  "projectFilePath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\blued\\.nuget\\packages\\lib.harmony\\2.3.3\\lib.harmony.2.3.3.nupkg.sha512",
     "C:\\Users\\blued\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
@@ -18,5 +18,16 @@
     "C:\\Users\\blued\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\blued\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Text.Json' 8.0.4 has a known high severity vulnerability, https://github.com/advisories/GHSA-8g4q-xg66-9fp4",
+      "libraryId": "System.Text.Json",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.6.2"
+      ]
+    }
+  ]
 }

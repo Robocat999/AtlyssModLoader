@@ -118,15 +118,50 @@ namespace AtlyssModLoader
                 return await default(Task<T>).ConfigureAwait(false);
             }
 
-            using FileStream stream = File.OpenRead(filePath);
-            return await JsonSerializer.DeserializeAsync<T>(stream).ConfigureAwait(false);
+            FileStream firstStream = File.OpenRead(filePath);
+            try
+            {
+                var firstAttemptRead = await JsonSerializer.DeserializeAsync<T>(firstStream).ConfigureAwait(false);
+            }
+            catch (JsonException e)
+            {
+                firstStream.Close();
+                if (Path.GetFileName(filePath) == LOAD_CONFIG_FILE_NAME)
+                {
+                    if (Harmony.DEBUG)
+                        FileLog.Log("  Config file was bad. Regenerating...");
+
+                    // Regenerate a bad config
+                    File.Delete(filePath);
+                    GetLoadConfigFile(Path.GetDirectoryName(filePath));
+                }
+                else
+                {
+                    if (Harmony.DEBUG)
+                        FileLog.Log("  Json file encountered an unknown error in reading");
+                    return default(T);
+                }
+            }
+            firstStream.Close();
+
+            // Second read for a regenerated file
+            if (Harmony.DEBUG)
+                FileLog.Log("  Attempting the second read for Json file");
+
+            using FileStream secondStream = File.OpenRead(filePath);
+            return await JsonSerializer.DeserializeAsync<T>(secondStream).ConfigureAwait(false);
         }
 
         private static void WriteJson<T>(string filePath, T objectToSerialize)
         {
             if (Harmony.DEBUG)
                 FileLog.Log("Writing Json...");
+
             string jsonString = JsonSerializer.Serialize(objectToSerialize);
+
+            if (Harmony.DEBUG)
+                FileLog.Log($"  Json string is: {jsonString}");
+
             File.WriteAllText(filePath, jsonString);
         }
 
@@ -200,14 +235,25 @@ namespace AtlyssModLoader
         /// <returns></returns>
         private static string GetLoadConfigFile(string modDirectoy)
         {
+            if (Harmony.DEBUG)
+                FileLog.Log("Getting Load Config File");
+
             string configFilePath = Path.Combine(modDirectoy, LOAD_CONFIG_FILE_NAME);
             if (!File.Exists(configFilePath))
             {
+                if (Harmony.DEBUG)
+                    FileLog.Log("  Generating a new Load Config File");
+
                 File.Create(configFilePath);
                 LoadOrderJsonData defaultData = new LoadOrderJsonData();
                 defaultData.JsonVersion = JSON_VERSION;
                 defaultData.LoadOrderEntries = new List<LoadOrderEntry>();
                 WriteJson(configFilePath, defaultData);
+            }
+            else
+            {
+                if (Harmony.DEBUG)
+                    FileLog.Log("  Load Config File already exists. Returning path");
             }
             return configFilePath;
         }
@@ -272,7 +318,7 @@ namespace AtlyssModLoader
         // Entry Point
         public static void Init()
         {
-            Harmony.DEBUG = false;
+            Harmony.DEBUG = true;
             InitAsync().Wait();
         }
     }
