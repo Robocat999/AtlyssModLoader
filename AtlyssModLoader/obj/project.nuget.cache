@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "nzoJKXF7EQoJ+HWcB7jshbIps6G2NS8YC9z+pzV46mjCAGMVQXQ3/U4lU+2NZ4bPR3XqWr8c6yFboq/zZNX35g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\blued\\.nuget\\packages\\lib.harmony\\2.2.2\\lib.harmony.2.2.2.nupkg.sha512",
+    "C:\\Users\\blued\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\blued\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net46\\1.0.3\\microsoft.netframework.referenceassemblies.net46.1.0.3.nupkg.sha512",
+    "C:\\Users\\blued\\.nuget\\packages\\mono.cecil\\0.11.5\\mono.cecil.0.11.5.nupkg.sha512"
+  ],
+  "logs": []
+}
