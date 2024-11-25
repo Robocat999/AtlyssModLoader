@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AtlyssLoaderInjector")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7209ad0e5729a2785c62527f4972706076464a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4b2062d0d0b82bcad1a51d39f8092469f166b3c")]
 [assembly: System.Reflection.AssemblyProductAttribute("AtlyssLoaderInjector")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AtlyssLoaderInjector")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
