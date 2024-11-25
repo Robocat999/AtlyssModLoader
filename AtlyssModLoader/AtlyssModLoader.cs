@@ -118,6 +118,7 @@ namespace AtlyssModLoader
                 return await default(Task<T>).ConfigureAwait(false);
             }
 
+            // TODO: Pull verification out of this function and instead return a workable error 
             FileStream firstStream = File.OpenRead(filePath);
             try
             {
