@@ -122,6 +122,8 @@ namespace AtlyssModLoader
             try
             {
                 var firstAttemptRead = await JsonSerializer.DeserializeAsync<T>(firstStream).ConfigureAwait(false);
+                firstStream.Close();
+                return firstAttemptRead;
             }
             catch (JsonException e)
             {
@@ -148,8 +150,23 @@ namespace AtlyssModLoader
             if (Harmony.DEBUG)
                 FileLog.Log("  Attempting the second read for Json file");
 
-            using FileStream secondStream = File.OpenRead(filePath);
-            return await JsonSerializer.DeserializeAsync<T>(secondStream).ConfigureAwait(false);
+            FileStream secondStream = File.OpenRead(filePath);
+            try
+            {
+                var secondAttemptRead = await JsonSerializer.DeserializeAsync<T>(secondStream).ConfigureAwait(false);
+                secondStream.Close();
+                return secondAttemptRead;
+            }
+            catch (JsonException e)
+            {
+                if (Harmony.DEBUG)
+                    FileLog.Log("  Json file was unreadable on second read!");
+            }
+            secondStream.Close();
+
+            if (Harmony.DEBUG)
+                FileLog.Log("  All reads failed! Retuning a default value!");
+            return default(T);
         }
 
         private static void WriteJson<T>(string filePath, T objectToSerialize)
