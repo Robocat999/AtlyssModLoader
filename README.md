@@ -1,4 +1,18 @@
-# AtlyssModLoader
+# This loader is deprecated! Please use [BepInEx v5.4.23.2](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2)
+
+
+For various reasons, the Atlyss modding community agree that BepInEx is the best way forward for mod devlopment. It is well maintained and proven to work with games such as RiskOfRain2. 
+
+For users of AtlyssModLoader, check out [this guide](https://docs.bepinex.dev/articles/user_guide/installation/index.html) on BepInEx installation.
+A transitional guide will be released soon to help guide users needing more exact instructions.
+
+If you have devloped a mod for the AtlyssModLoader, I am presently investigating conversion. 
+Both AtlyssModLoader and BepInEx use Harmony at their core, so it should be relativly easy to transition. I appologize for the inconveince, but we truly beleive this the best long term solution.
+
+---
+## Archived README
+### Really, don't use this!
+
 The AtlyssModLoader is a project encompassing both a code injector and a mod loader for the game ATLYSS by Kiseff. Wishlist [ATLYSS on Steam](https://store.steampowered.com/app/2768430/ATLYSS/)!
 
 The AtlyssLoaderInjector is used to splice in the startup code for the AtlyssModLoader in to ATLYSS at runtime. This is neccsary for the AtlyssModLoader to function.
