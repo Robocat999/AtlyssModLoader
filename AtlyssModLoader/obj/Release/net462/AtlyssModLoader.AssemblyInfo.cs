@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AtlyssModLoader")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee402fa8cbb18d625683d4e7b9c942d7c625ef3a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3237fe29708e21c1491c80f697c1f8bbb8326d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("AtlyssModLoader")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AtlyssModLoader")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
