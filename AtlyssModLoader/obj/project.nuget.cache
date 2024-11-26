@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YiDaK437Axo=",
+  "dgSpecHash": "ohjtQS01lAA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
+  "projectFilePath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssModLoader\\AtlyssModLoader.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\blued\\.nuget\\packages\\lib.harmony\\2.3.3\\lib.harmony.2.3.3.nupkg.sha512",
     "C:\\Users\\blued\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",

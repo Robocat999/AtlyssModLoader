@@ -287,11 +287,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
+      "projectUniqueName": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
       "projectName": "AtlyssLoaderInjector",
-      "projectPath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
+      "projectPath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
       "packagesPath": "C:\\Users\\blued\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\obj\\",
+      "outputPath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\blued\\AppData\\Roaming\\NuGet\\NuGet.Config",
