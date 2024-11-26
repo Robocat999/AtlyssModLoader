@@ -20,3 +20,7 @@ C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Release\net
 C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Release\net8.0\AtlyssLoaderInjector.pdb
 C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Release\net8.0\AtlyssLoaderInjector.genruntimeconfig.cache
 C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\obj\Release\net8.0\ref\AtlyssLoaderInjector.dll
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\bin\Release\net8.0\System.IO.Pipelines.dll
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\bin\Release\net8.0\System.Text.Encodings.Web.dll
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\bin\Release\net8.0\System.Text.Json.dll
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssLoaderInjector\bin\Release\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll

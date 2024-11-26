@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z+cm0u5VMduLhfn/bPodZG1gzFrkgOq/WnPgoPI60Sy5Qzxt650oCScpDxlC6+zwowx5LSp8ecLp9gdq2FPymw==",
+  "dgSpecHash": "B01gdFapXyg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\blued\\source\\repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
+  "projectFilePath": "C:\\Users\\blued\\Source\\Repos\\AtlyssModLoader\\AtlyssLoaderInjector\\AtlyssLoaderInjector.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\blued\\.nuget\\packages\\lib.harmony\\2.3.3\\lib.harmony.2.3.3.nupkg.sha512",
     "C:\\Users\\blued\\.nuget\\packages\\mono.cecil\\0.11.6\\mono.cecil.0.11.6.nupkg.sha512",

@@ -6,6 +6,7 @@ using HarmonyLib;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Security;
 
 
 // This script uses / adapts the BTMLModLoader (Public Domain)
@@ -17,17 +18,26 @@ namespace AtlyssModLoader
         private const int JSON_VERSION = 1;
         private const BindingFlags PUBLIC_STATIC_BINDING_FLAGS = BindingFlags.Public | BindingFlags.Static;
         private const string LOAD_CONFIG_FILE_NAME = "AtlyssModLoader_Load_Order_Config.Json";
+        private const string LOADER_VERSION = "AtlyssModLoader Version 0.2.2";
         private static readonly List<string> IGNORE_FILE_NAMES = new List<string>()
         {
             "0Harmony.dll",
             "AtlyssModLoader.dll"
         };
+        private static bool LoaderInfoReported = false;
 
+        /// <summary>
+        /// Loads a DLL and calls its Init function so it may patch the game
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="methodName"></param>
+        /// <param name="typeName"></param>
+        /// <param name="prms"></param>
+        /// <param name="bFlags"></param>
         public static void LoadDLL(string path, string methodName = "Init", string typeName = null,
             object[] prms = null, BindingFlags bFlags = PUBLIC_STATIC_BINDING_FLAGS)
         {
-            if (Harmony.DEBUG)
-                FileLog.Log("AtlyssModLoader is attempting to laod a DLL");
+            DebugLog("AtlyssModLoader is attempting to load a DLL");
             var fileName = Path.GetFileName(path);
             
             try
@@ -49,8 +59,7 @@ namespace AtlyssModLoader
 
                 if (types.Count == 0)
                 {
-                    if (Harmony.DEBUG)
-                        FileLog.Log("  DLL loader type count was 0");
+                    DebugLog("  DLL loader type count was 0");
                     return;
                 }
 
@@ -64,8 +73,7 @@ namespace AtlyssModLoader
 
                     if (methodParams.Length == 0)
                     {
-                        if (Harmony.DEBUG)
-                            FileLog.Log(  "AtlyssModLoader inserted a DLL method with no params");
+                        DebugLog(  "AtlyssModLoader inserted a DLL method with no params");
                         entryMethod.Invoke(null, null);
                         continue;
                     }
@@ -101,7 +109,36 @@ namespace AtlyssModLoader
         }
 
         /// <summary>
-        /// 
+        /// Logs a message only if Harmony.DEBUG is true
+        /// </summary>
+        /// <param name="message"></param>
+        private static void DebugLog(string message)
+        {
+            if (Harmony.DEBUG)
+                FileLog.Log(message);
+        }
+
+        /// <summary>
+        /// Used when the loader has encournted a major error. Indicates info useful for identifying user version
+        /// Will refuse to display if info has already been displayed elsewhere
+        /// </summary>
+        private static void LogLoaderInfo()
+        {
+            if (LoaderInfoReported)
+                return;
+
+            FileLog.Log($"\n\n -- LOADER INFO --");
+            FileLog.Log($"  Loader Version: {LOADER_VERSION}");
+            FileLog.Log($"  Debugging Enabled: {Harmony.DEBUG}");
+            FileLog.Log($"  \nThis info is being presented due to a major error occuring");
+            FileLog.Log($"  Please include it if you are providing only a portion of the log as an error report");
+            FileLog.Log($"  If AtlyssModLoader is giving you trouble, please contanct Robocat999 on the Atlyss Discord\n\n");
+
+            LoaderInfoReported = true;
+        }
+
+        /// <summary>
+        /// Reads a Json file
         /// Credit: https://stackoverflow.com/questions/13297563/read-and-parse-a-json-file-in-c-sharp
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -109,30 +146,30 @@ namespace AtlyssModLoader
         /// <returns></returns>
         private static async Task<T> ReadJsonAsync<T>(string filePath)
         {
-            if (Harmony.DEBUG)
-                FileLog.Log("Reading Json...");
+            DebugLog("Reading Json...");
             if (!File.Exists(filePath))
             {
-                if (Harmony.DEBUG)
-                    FileLog.Log("  Could not find file");
-                return await default(Task<T>).ConfigureAwait(false);
+                LogLoaderInfo();
+                FileLog.Log($"  Could not find Json file at path {filePath}");
+                FileLog.Log($"  Returing default value! Failure is likely imminent!");
+                return default(T);
             }
 
             // TODO: Pull verification out of this function and instead return a workable error 
-            FileStream firstStream = File.OpenRead(filePath);
+            
             try
             {
-                var firstAttemptRead = await JsonSerializer.DeserializeAsync<T>(firstStream).ConfigureAwait(false);
-                firstStream.Close();
-                return firstAttemptRead;
+                using (FileStream firstStream = File.OpenRead(filePath))
+                {
+                    var firstAttemptRead = await JsonSerializer.DeserializeAsync<T>(firstStream).ConfigureAwait(false);
+                    return firstAttemptRead;
+                }
             }
             catch (JsonException e)
             {
-                firstStream.Close();
                 if (Path.GetFileName(filePath) == LOAD_CONFIG_FILE_NAME)
                 {
-                    if (Harmony.DEBUG)
-                        FileLog.Log("  Config file was bad. Regenerating...");
+                    DebugLog("  Config file was bad. Regenerating...");
 
                     // Regenerate a bad config
                     File.Delete(filePath);
@@ -140,47 +177,137 @@ namespace AtlyssModLoader
                 }
                 else
                 {
-                    if (Harmony.DEBUG)
-                        FileLog.Log("  Json file encountered an unknown error in reading");
+                    FileLog.Log("  Json file encountered an unknown error in reading!");
                     return default(T);
                 }
             }
-            firstStream.Close();
 
             // Second read for a regenerated file
-            if (Harmony.DEBUG)
-                FileLog.Log("  Attempting the second read for Json file");
+            DebugLog("  Attempting the second read for Json file");
 
-            FileStream secondStream = File.OpenRead(filePath);
             try
             {
-                var secondAttemptRead = await JsonSerializer.DeserializeAsync<T>(secondStream).ConfigureAwait(false);
-                secondStream.Close();
-                return secondAttemptRead;
+                using (FileStream secondStream = File.OpenRead(filePath))
+                {
+                    var secondAttemptRead = await JsonSerializer.DeserializeAsync<T>(secondStream).ConfigureAwait(false);
+                    return secondAttemptRead;
+                }
             }
             catch (JsonException e)
             {
-                if (Harmony.DEBUG)
-                    FileLog.Log("  Json file was unreadable on second read!");
+                LogLoaderInfo();
+                FileLog.Log("  Json file was unreadable on second read!");
             }
-            secondStream.Close();
 
-            if (Harmony.DEBUG)
-                FileLog.Log("  All reads failed! Retuning a default value!");
+            LogLoaderInfo();
+            FileLog.Log("  All reads failed! ReadJsonAsync is retuning a default value!");
+            FileLog.Log("    Please contact Robocat999 on the Atlyss Discord!");
             return default(T);
         }
 
+        /// <summary>
+        /// Writes an object to a Json file
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filePath"></param>
+        /// <param name="objectToSerialize"></param>
         private static void WriteJson<T>(string filePath, T objectToSerialize)
         {
-            if (Harmony.DEBUG)
-                FileLog.Log("Writing Json...");
+            DebugLog("Writing Json...");
 
             string jsonString = JsonSerializer.Serialize(objectToSerialize);
 
-            if (Harmony.DEBUG)
-                FileLog.Log($"  Json string is: {jsonString}");
+            DebugLog($"  Json string is: {jsonString}");
 
-            File.WriteAllText(filePath, jsonString);
+            try
+            {
+                DebugLog($"  Attempting Write...");
+                File.WriteAllText(filePath, jsonString);
+                DebugLog($"  Write Completed with no errors!");
+                return;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                FileLog.Log("  Failed to write to Json file due to an UnauthorizedAccessExcpetion!");
+                FileLog.Log("    Please attempt to run ATLYSS as an administrator!");
+                FileLog.Log("    If encountering further issues, also attempt injecting as an administrator!");
+                FileLog.Log("      Remember to repair the ATLYSS files through Steam to clear out the orignal injection!");
+                FileLog.Log($"     \nRaw Exception: {e.ToString()}\n\n");
+            }
+            catch (PathTooLongException e)
+            {
+                FileLog.Log("  Failed to write to Json file due to the file path being too long!");
+                FileLog.Log($"     Attempted Path: {filePath}");
+                FileLog.Log("     Does this look right?");
+                FileLog.Log($"     \nRaw Exception: {e.ToString()}\n\n");
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                FileLog.Log("  Failed to write to Json file due to an issue in finding the directory!");
+                FileLog.Log($"     Attempted Path: {filePath}");
+                FileLog.Log("     Does this look right?");
+                FileLog.Log($"     \nRaw Exception: {e.ToString()}\n\n");
+            }
+            catch (IOException e)
+            {
+                FileLog.Log("  Failed to write to Json file due to an IO Error!");
+                FileLog.Log("     Is your PC overloaded?");
+                FileLog.Log("     If not, please contact Robocat999 on the Atlyss Discord");
+                FileLog.Log($"     \nRaw Exception: {e.ToString()}\n\n");
+            }
+            catch (SecurityException e)
+            {
+                FileLog.Log("  Failed to write to Json file due to a Security Error!");
+                FileLog.Log("    Please attempt to run ATLYSS as an administrator!");
+                FileLog.Log("    If encountering further issues, also attempt injecting as an administrator!");
+                FileLog.Log("      Remember to repair the ATLYSS files through Steam to clear out the orignal injection!");
+                FileLog.Log($"     \nRaw Exception: {e.ToString()}\n\n");
+            }
+            catch (NotSupportedException e)
+            {
+                FileLog.Log("  Failed to write to Json file due to a NotSuppourtedException!");
+                FileLog.Log("    Please contact Robocat999 on the Atlyss Discord!");
+                FileLog.Log($"     \nRaw Exception: {e.ToString()}\n\n");
+            }
+            catch (Exception e)
+            {
+                FileLog.Log("  Failed to write to Json file due to an unspecified error!");
+                FileLog.Log("    Please contact Robocat999 on the Atlyss Discord!");
+                FileLog.Log($"     \nRaw Exception: {e.ToString()}\n\n");
+            }
+
+            LogLoaderInfo();
+            FileLog.Log("  Attempting emergency Json repair...");
+
+            // Check if the JSON file already exists
+            if (!File.Exists(filePath))
+            {
+                FileLog.Log($"    No known Json file at path: {filePath}");
+                FileLog.Log("  Emergency repair failed!");
+                return;
+            }
+
+            if (new FileInfo(filePath).Length == 0)
+            {
+                FileLog.Log("  Existing blank Json file detected!");
+                FileLog.Log("    Attempting to append Json string instead...");
+
+                try
+                {
+                    File.AppendAllText(filePath, jsonString);
+                    FileLog.Log("    Append succesful!");
+                    FileLog.Log("    If this is a rare occurance, please disregard this logfile");
+                    FileLog.Log("    If this is a common occurance, please contact Robocat999 on the Atlyss Discord!");
+                    return;
+                }
+                catch (Exception e)
+                {
+                    FileLog.Log("    Append failed with an unspecified error!");
+                    FileLog.Log($"      \nRaw Exception: {e.ToString()}\n\n");
+                }
+            }
+
+            FileLog.Log("  All emergency repairs failed! ");
         }
 
         /// <summary>
@@ -191,8 +318,7 @@ namespace AtlyssModLoader
         /// <param name="modsToAdd"></param>
         private static void UpdateLoadOrder(string jsonDirectory, string modDirectory, List<string> modsToAdd, LoadOrderJsonData loadData)
         {
-            if (Harmony.DEBUG)
-                FileLog.Log("UpdateLoadOrder Activated");
+            DebugLog("UpdateLoadOrder Activated");
             // Clear out bad existing entries
             List<LoadOrderEntry> loadOrderEntries = loadData.LoadOrderEntries;
             for (int i = 0; i < loadData.LoadOrderEntries.Count; i++)
@@ -228,21 +354,18 @@ namespace AtlyssModLoader
         /// <returns></returns>
         private static void EnsureLoadOrder(string dllPath, LoadOrderJsonData loadOrder, ref List<string> modsToAdd)
         {
-            if (Harmony.DEBUG)
-                FileLog.Log("EnsureLoadOrder Activated");
+            DebugLog("EnsureLoadOrder Activated");
             string modName = Path.GetFileName(dllPath); // TODO: Figure out the proper name scheme 
             foreach(LoadOrderEntry loadEntry in loadOrder.LoadOrderEntries)
             {
                 if (loadEntry.ModName == modName)
                 {
-                    if (Harmony.DEBUG)
-                        FileLog.Log("  Mod was already tracked");
+                    DebugLog("  Mod was already tracked");
                     return;
                 }
             }
 
-            if (Harmony.DEBUG)
-                FileLog.Log($"  Adding new mod with name {modName} to modsToAdd");
+            DebugLog($"  Adding new mod with name {modName} to modsToAdd");
             modsToAdd.Add(modName);
         }
 
@@ -253,14 +376,12 @@ namespace AtlyssModLoader
         /// <returns></returns>
         private static string GetLoadConfigFile(string modDirectoy)
         {
-            if (Harmony.DEBUG)
-                FileLog.Log("Getting Load Config File");
+            DebugLog("Getting Load Config File");
 
             string configFilePath = Path.Combine(modDirectoy, LOAD_CONFIG_FILE_NAME);
             if (!File.Exists(configFilePath))
             {
-                if (Harmony.DEBUG)
-                    FileLog.Log("  Generating a new Load Config File");
+                DebugLog("  Generating a new Load Config File");
 
                 File.Create(configFilePath);
                 LoadOrderJsonData defaultData = new LoadOrderJsonData();
@@ -270,8 +391,7 @@ namespace AtlyssModLoader
             }
             else
             {
-                if (Harmony.DEBUG)
-                    FileLog.Log("  Load Config File already exists. Returning path");
+                DebugLog("  Load Config File already exists. Returning path");
             }
             return configFilePath;
         }
@@ -293,8 +413,7 @@ namespace AtlyssModLoader
 
         private static async Task InitAsync()
         {
-            if (Harmony.DEBUG)
-                FileLog.Log("AtlyssModLoader Init has begun");
+            DebugLog("AtlyssModLoader Init has begun");
             string loaderDirectory = Directory.GetCurrentDirectory();
             string modDirectory = GetModDirectory(loaderDirectory);
             string loadConfigFilePath = GetLoadConfigFile(modDirectory);
@@ -305,8 +424,7 @@ namespace AtlyssModLoader
             // Catch no mods loaded
             if (dllPaths.Count == 0)
             {
-                if (Harmony.DEBUG)
-                    FileLog.Log("AtlyssModLoader Init found no mods to load");
+                DebugLog("AtlyssModLoader Init found no mods to load");
                 return;
             }
 
@@ -328,9 +446,8 @@ namespace AtlyssModLoader
                 string dllPath = Path.Combine(modDirectory, modEntry.ModName);
                 LoadDLL(dllPath);
             }
-            
-            if (Harmony.DEBUG)
-                FileLog.Log("AtlyssModLoader Init has completed normally");
+
+            DebugLog("AtlyssModLoader Init has completed normally");
         }
 
         // Entry Point

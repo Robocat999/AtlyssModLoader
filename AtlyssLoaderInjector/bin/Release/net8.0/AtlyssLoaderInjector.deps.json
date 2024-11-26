@@ -9,8 +9,8 @@
       "AtlyssLoaderInjector/1.0.0": {
         "dependencies": {
           "Lib.Harmony": "2.3.3",
-          "Mono.Cecil": "0.11.5",
-          "System.Text.Json": "8.0.4"
+          "Mono.Cecil": "0.11.6",
+          "System.Text.Json": "9.0.0"
         },
         "runtime": {
           "AtlyssLoaderInjector.dll": {}
@@ -18,7 +18,7 @@
       },
       "Lib.Harmony/2.3.3": {
         "dependencies": {
-          "System.Text.Json": "8.0.4"
+          "System.Text.Json": "9.0.0"
         },
         "runtime": {
           "lib/net8.0/0Harmony.dll": {
@@ -27,30 +27,60 @@
           }
         }
       },
-      "Mono.Cecil/0.11.5": {
+      "Mono.Cecil/0.11.6": {
         "runtime": {
           "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {
-            "assemblyVersion": "0.11.5.0",
-            "fileVersion": "0.11.5.0"
+            "assemblyVersion": "0.11.6.0",
+            "fileVersion": "0.11.6.0"
           },
           "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {
-            "assemblyVersion": "0.11.5.0",
-            "fileVersion": "0.11.5.0"
+            "assemblyVersion": "0.11.6.0",
+            "fileVersion": "0.11.6.0"
           },
           "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {
-            "assemblyVersion": "0.11.5.0",
-            "fileVersion": "0.11.5.0"
+            "assemblyVersion": "0.11.6.0",
+            "fileVersion": "0.11.6.0"
           },
           "lib/netstandard2.0/Mono.Cecil.dll": {
-            "assemblyVersion": "0.11.5.0",
-            "fileVersion": "0.11.5.0"
+            "assemblyVersion": "0.11.6.0",
+            "fileVersion": "0.11.6.0"
           }
         }
       },
-      "System.Text.Encodings.Web/8.0.0": {},
-      "System.Text.Json/8.0.4": {
+      "System.IO.Pipelines/9.0.0": {
+        "runtime": {
+          "lib/net8.0/System.IO.Pipelines.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.24.52809"
+          }
+        }
+      },
+      "System.Text.Encodings.Web/9.0.0": {
+        "runtime": {
+          "lib/net8.0/System.Text.Encodings.Web.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.24.52809"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll": {
+            "rid": "browser",
+            "assetType": "runtime",
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.24.52809"
+          }
+        }
+      },
+      "System.Text.Json/9.0.0": {
         "dependencies": {
-          "System.Text.Encodings.Web": "8.0.0"
+          "System.IO.Pipelines": "9.0.0",
+          "System.Text.Encodings.Web": "9.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/System.Text.Json.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.24.52809"
+          }
         }
       }
     }
@@ -68,26 +98,33 @@
       "path": "lib.harmony/2.3.3",
       "hashPath": "lib.harmony.2.3.3.nupkg.sha512"
     },
-    "Mono.Cecil/0.11.5": {
+    "Mono.Cecil/0.11.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-fxfX+0JGTZ8YQeu1MYjbBiK2CYTSzDyEeIixt+yqKKTn7FW8rv7JMY70qevup4ZJfD7Kk/VG/jDzQQTpfch87g==",
-      "path": "mono.cecil/0.11.5",
-      "hashPath": "mono.cecil.0.11.5.nupkg.sha512"
+      "sha512": "sha512-f33RkDtZO8VlGXCtmQIviOtxgnUdym9xx/b1p9h91CRGOsJFxCFOFK1FDbVt1OCf1aWwYejUFa2MOQyFWTFjbA==",
+      "path": "mono.cecil/0.11.6",
+      "hashPath": "mono.cecil.0.11.6.nupkg.sha512"
     },
-    "System.Text.Encodings.Web/8.0.0": {
+    "System.IO.Pipelines/9.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ==",
-      "path": "system.text.encodings.web/8.0.0",
-      "hashPath": "system.text.encodings.web.8.0.0.nupkg.sha512"
+      "sha512": "sha512-eA3cinogwaNB4jdjQHOP3Z3EuyiDII7MT35jgtnsA4vkn0LUrrSHsU0nzHTzFzmaFYeKV7MYyMxOocFzsBHpTw==",
+      "path": "system.io.pipelines/9.0.0",
+      "hashPath": "system.io.pipelines.9.0.0.nupkg.sha512"
     },
-    "System.Text.Json/8.0.4": {
+    "System.Text.Encodings.Web/9.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-bAkhgDJ88XTsqczoxEMliSrpijKZHhbJQldhAmObj/RbrN3sU5dcokuXmWJWsdQAhiMJ9bTayWsL1C9fbbCRhw==",
-      "path": "system.text.json/8.0.4",
-      "hashPath": "system.text.json.8.0.4.nupkg.sha512"
+      "sha512": "sha512-e2hMgAErLbKyUUwt18qSBf9T5Y+SFAL3ZedM8fLupkVj8Rj2PZ9oxQ37XX2LF8fTO1wNIxvKpihD7Of7D/NxZw==",
+      "path": "system.text.encodings.web/9.0.0",
+      "hashPath": "system.text.encodings.web.9.0.0.nupkg.sha512"
+    },
+    "System.Text.Json/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-js7+qAu/9mQvnhA4EfGMZNEzXtJCDxgkgj8ohuxq/Qxv+R56G+ljefhiJHOxTNiw54q8vmABCWUwkMulNdlZ4A==",
+      "path": "system.text.json/9.0.0",
+      "hashPath": "system.text.json.9.0.0.nupkg.sha512"
     }
   }
 }

@@ -23,3 +23,4 @@ C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssModLoader\obj\Release\net462\A
 C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssModLoader\obj\Release\net462\AtlyssMo.8483985E.Up2Date
 C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssModLoader\obj\Release\net462\AtlyssModLoader.dll
 C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssModLoader\obj\Release\net462\AtlyssModLoader.pdb
+C:\Users\blued\Source\Repos\AtlyssModLoader\AtlyssModLoader\bin\Release\net462\System.IO.Pipelines.dll
