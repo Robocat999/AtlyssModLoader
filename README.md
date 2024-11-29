@@ -4,10 +4,8 @@
 For various reasons, the Atlyss modding community agree that BepInEx is the best way forward for mod devlopment. It is well maintained and proven to work with games such as RiskOfRain2. 
 
 For users of AtlyssModLoader, check out [this guide](https://docs.bepinex.dev/articles/user_guide/installation/index.html) on BepInEx installation.
-A transitional guide will be released soon to help guide users needing more exact instructions.
 
-If you have devloped a mod for the AtlyssModLoader, I am presently investigating conversion. 
-Both AtlyssModLoader and BepInEx use Harmony at their core, so it should be relativly easy to transition. I appologize for the inconveince, but we truly beleive this the best long term solution.
+If you have devloped a mod for the AtlyssModLoader, please see this [guide](https://github.com/Robocat999/AtlyssModLoader/wiki/Converting-AtlyssModLoaders-to-BepInEx).
 
 ---
 ## Archived README
